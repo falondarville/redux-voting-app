@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import './index.css';
 import App from './App';
+import Results from './components/results';
 import myApp from './reducers';
 import registerServiceWorker from './registerServiceWorker';
 
@@ -11,9 +12,15 @@ let store = createStore(myApp);
 
 // ReactDOM.render comes on its own, but we place it inside our own render function and call this render function at the end of the file. 
 // we do this because we first have to subscribe to the store. That way, each time the store changes, we are calling the render function. 
+// pass store into the component
 function render () {
 	ReactDOM.render(
-		<App />, 
+		<div className='container'>
+			<App store={store} />
+			<hr />
+			<Results store={store} />
+		</div>
+		,
 		document.getElementById('root'));
 		registerServiceWorker();
 }
